@@ -29,7 +29,7 @@ const Register = () => {
         }else if(password!==cpassword){
             alert("password doesn't match")
         }else{
-            const data=await fetch('http://localhost:8081/register',{
+            const data=await fetch('https://erpbackend-959k.onrender.com/register',{
                 method:'POST',
                 headers:{
                     "Access-Control-Allow-Origin": true,

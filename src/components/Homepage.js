@@ -44,7 +44,7 @@ const Homepage = () => {
       console.log(product)
       setInddata(product);
       let token=localStorage.getItem('usersdatatoken');
-      const checkres=await fetch(`http://localhost:8081/addcart/${product._id}`,{
+      const checkres=await fetch(`https://erpbackend-959k.onrender.com/addcart/${product._id}`,{
         method: 'POST',
         headers:{
           "Access-Control-Allow-Origin": true,
@@ -74,7 +74,7 @@ const Homepage = () => {
 
     const dashboardvalid = async () => {
         let token = localStorage.getItem('usersdatatoken');
-        const res = await fetch('http://localhost:8081/validuser', {
+        const res = await fetch('https://erpbackend-959k.onrender.com/validuser', {
             method: "GET",
             headers: {
                 "Access-Control-Allow-Origin": true,

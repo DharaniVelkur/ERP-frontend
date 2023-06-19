@@ -18,7 +18,7 @@ const Login = () => {
         }else if(password===""){
             alert("Enter password")
         }else{
-            const data=await fetch('http://localhost:8081/login',{
+            const data=await fetch('https://erpbackend-959k.onrender.com/login',{
                 method:'POST',
                 headers:{
                     "Access-Control-Allow-Origin": true,

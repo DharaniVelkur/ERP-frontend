@@ -17,7 +17,7 @@ const Header = () => {
 
 const logoutuser=async ()=>{
   let token=localStorage.getItem('usersdatatoken');
-  const res=await fetch('http://localhost:8081/logout',{
+  const res=await fetch('https://erpbackend-959k.onrender.com/logout',{
     method: "GET",
       headers: {
         "Access-Control-Allow-Origin": true,

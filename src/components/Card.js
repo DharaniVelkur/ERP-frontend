@@ -42,7 +42,7 @@ const Card = (props) => {
     console.log(product)
     setInddata(product);
     let token=localStorage.getItem('usersdatatoken');
-    const checkres=await fetch(`http://localhost:8081/addcart/${product._id}`,{
+    const checkres=await fetch(`https://erpbackend-959k.onrender.com/addcart/${product._id}`,{
       method: 'POST',
       headers:{
         "Access-Control-Allow-Origin": true,

@@ -5,7 +5,7 @@ const ContextProvider = (props) => {
     let [allproducts,setAllproducts]=useState([]);
     let [loginData,setLoginData]=useState("")
     const getproducts=async ()=>{
-        const response=await fetch('http://localhost:8081/getProducts',{
+        const response=await fetch('https://erpbackend-959k.onrender.com/getProducts',{
             method: 'GET',
             headers:{
                 'ACCESS-CONTROL-ALLOW-ORIGIN': true,
