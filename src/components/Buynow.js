@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Buynowcard from './Buynowcard';
 import { useNavigate } from 'react-router-dom';
+import { getproductsContext } from './context/ContextProvider';
 // import { loadScript, isScriptLoaded, isScriptLoadSucceeded } from 'utils/loadScript';
 // import Razorpay from 'razorpay';
 
 const Buynow = () => {
   let [cartdata, setCartdata] = useState([]);
+  let {cartCount,setCartcount}=useContext(getproductsContext)
   let navigate=useNavigate()
   const [isRazorpayLoaded, setIsRazorpayLoaded] = useState(false);
   const [isPaymentSuccess, setIsPaymentSuccess] = useState(false);
@@ -42,7 +44,8 @@ const Buynow = () => {
 
 
   const checkout = async () => {
-    alert("Total amount to be paid :" +totalAmountTobePaid)
+    alert("Total amount to be paid :" +totalAmountTobePaid);
+    setCartcount(0);
  
    await handlePayment();
    let token=localStorage.getItem('usersdatatoken');
