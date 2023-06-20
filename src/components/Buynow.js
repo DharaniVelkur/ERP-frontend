@@ -10,6 +10,14 @@ const Buynow = () => {
   const [isRazorpayLoaded, setIsRazorpayLoaded] = useState(false);
   const [isPaymentSuccess, setIsPaymentSuccess] = useState(false);
 
+  let totalAmountTobePaid=0;
+  cartdata.map(e=>{
+    totalAmountTobePaid=totalAmountTobePaid+e.price;
+    return totalAmountTobePaid;
+  })
+  let x=totalAmountTobePaid;
+  // console.log(Math.trunc(totalAmountTobePaid));
+
   const getdatabuy = async () => {
 
     let token = localStorage.getItem('usersdatatoken');
@@ -22,9 +30,10 @@ const Buynow = () => {
         Accept: "application/json",
       },
     });
+
     const data = await res.json();
     if (data.status !== 200) {
-      console.log("error")
+      console.log("error");
     } else {
       console.log(data.buyuser.carts);
       setCartdata(data.buyuser.carts);
@@ -33,6 +42,7 @@ const Buynow = () => {
 
 
   const checkout = async () => {
+    alert("Total amount to be paid :" +totalAmountTobePaid)
  
    await handlePayment();
    let token=localStorage.getItem('usersdatatoken');
@@ -51,7 +61,7 @@ const Buynow = () => {
     const data1=await checkres.json();
     setCartdata([]);
     navigate('/dashboard');
-    console.log(data1);
+    // console.log(data1);
 
     if(checkres.error){
       alert("user invalid")
@@ -71,7 +81,7 @@ const Buynow = () => {
   const handlePayment = async () => {
     const options = {
       key: "rzp_test_tX1XoeHDlWZgAt",
-      amount: 100,
+      amount:totalAmountTobePaid*100,
       currency: 'INR',
       name: 'Equipment Rental',
       description: 'Equipment Rental Payment',
@@ -80,12 +90,13 @@ const Buynow = () => {
         email: 'test71@gmail.com', // Replace with customer email address
         contact: '6567890909', // Replace with customer contact number
       },
+      
       notes: {
         rentalItem: JSON.stringify({ "greeting": "hello" }), // Replace with additional item details
       },
       theme: {
         color: '#528FF0', // Replace with your preferred color theme
-      },
+      }
     };
     const razorpay=new window.Razorpay(options);
     razorpay.open();
@@ -113,6 +124,21 @@ const Buynow = () => {
 
 };
 
+const handledelete=async (id)=>{
+  let token=localStorage.getItem('usersdatatoken')
+  let res=await fetch(`https://erpbackend-959k.onrender.com/deleteproduct/${id}`,{
+    method: 'DELETE',
+    headers:{
+      "Access-Control-Allow-Origin": true,
+      "Content-Type": "application/json",
+      Authorization : token,
+      Accept: "application/json"
+    }
+  });
+  const data=await res.json();
+  setCartdata(data.user.carts);
+  console.log(data);
+}
 
 
 useEffect(() => {
@@ -124,7 +150,7 @@ return (
     <div className='row justify-content-center'>
       {
         cartdata.map(product => {
-          return <Buynowcard product={product} />
+          return <Buynowcard product={product} handledelete={handledelete} />
         })
       }
 

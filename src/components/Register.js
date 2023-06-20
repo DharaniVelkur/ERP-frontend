@@ -43,9 +43,9 @@ const Register = () => {
                 })
             });
             const response=await data.json();
-            console.log(response);
+            console.log(data.status);
             
-            if(response.status===200){
+            if(data.status===200){
                 toast("user registration done");
                 setName("");
                 setEmail("");

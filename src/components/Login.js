@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,6 +7,13 @@ const Login = () => {
     let [email,setEmail]=useState("");
     let [password,setPassword]=useState("");
     let navigate=useNavigate();
+
+    useEffect(()=>{
+        if(localStorage.getItem('usersdatatoken')){
+            navigate('/dashboard');
+        }
+    })
+
     const loginUser=async(e)=>{
         e.preventDefault();
         if(email===""&& password===""){
@@ -32,11 +39,14 @@ const Login = () => {
             const response=await data.json();
             console.log(response)
             if(response.finduser){
+                if(response.finduser.email==="admin@gmail.com"){
+                    localStorage.setItem('isAdmin',true);
+                }
                 localStorage.setItem('usersdatatoken',response.token);
                 toast("Logged in successfully");
                 navigate('/dashboard');
                 setEmail("");
-                setPassword("")
+                setPassword("");
             }else{
                 toast(response.error);
                 setEmail("");
@@ -62,9 +72,11 @@ const Login = () => {
                 <button type="submit" className="btn btn-primary" onClick={loginUser}>Log In</button>
                 <p className='pt-4'>New User?<NavLink to={'/register'}>Sign Up</NavLink></p>
                 </div>
-                
-
             </form>
+            <div className='mt-5'style={{"backgroundColor":"yellow"}}>
+            <p>For admin : Email address : admin@gmail.com</p>
+            <p>password: 123456</p>
+            </div>
             <ToastContainer />
 
         </div>

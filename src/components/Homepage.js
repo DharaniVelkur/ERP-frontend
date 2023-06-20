@@ -4,9 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Modal, Box } from '@mui/material';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import Badge from '@mui/material/Badge';
 
 const Homepage = () => {
-    let { allproducts, setAllproducts, loginData, setLoginData } = useContext(getproductsContext);
+    let { allproducts, cartCount, setCartcount } = useContext(getproductsContext);
+
 
     let [inddata,setInddata]=useState([]);
     let navigate=useNavigate();
@@ -41,6 +43,7 @@ const Homepage = () => {
     const isContinueButtonDisabled = !(dateRange.startDate && dateRange.endDate && dateRange.endDate >= dateRange.startDate);
   
     const addtocart=async(product)=>{
+      setCartcount(cartCount+1);
       console.log(product)
       setInddata(product);
       let token=localStorage.getItem('usersdatatoken');
@@ -58,9 +61,9 @@ const Homepage = () => {
           endDate:dateRange.endDate
         })
       });
-      console.log(inddata);
+      // console.log(inddata);
       const data1=await checkres.json();
-      console.log(data1);
+      // console.log(data1);
   
       if(checkres.error){
         alert("user invalid")
@@ -121,19 +124,23 @@ const Homepage = () => {
                             Continue
                         </Button>
                     </div>
-                  {/* <Box> <p>helloooooooooooooooooo</p></Box>  */}
                 </Modal>
                 <div className='row' style={{ "justifyContent": "center" }}>
                     {
                         allproducts.map(e => {
                             return (
+                              
                                 <div className="card m-3" style={{ "width": "18rem" }}>
+                                  <Badge badgeContent={e.brand} color="secondary"/>
                                     <img src={e.image} className="card-img-top" alt="..." />
                                     <div className="card-body">
                                         <h5 className="card-title">{e.name}</h5>
                                         <p className="card-text">{e.description.slice(0, 99)}...</p>
-                                        <button className="btn btn-primary" onClick={() => { handleOpenModal(e) }}>Add to Cart</button>
+                                        <p className='card-text text-danger'>Price :{e.price}</p>
+                                        <button className="btn btn-info " onClick={() => { handleOpenModal(e) }}>Add to Cart</button>
+
                                     </div>
+                                   
                                 </div>
                             )
                         })

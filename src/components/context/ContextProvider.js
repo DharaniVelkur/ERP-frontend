@@ -3,7 +3,7 @@ export const getproductsContext=createContext();
 
 const ContextProvider = (props) => {
     let [allproducts,setAllproducts]=useState([]);
-    let [loginData,setLoginData]=useState("")
+    let [cartCount,setCartcount]=useState(0)
     const getproducts=async ()=>{
         const response=await fetch('https://erpbackend-959k.onrender.com/getProducts',{
             method: 'GET',
@@ -20,7 +20,7 @@ const ContextProvider = (props) => {
         getproducts();
     },[])
   return (
-    <getproductsContext.Provider value={{allproducts,setAllproducts,loginData,setLoginData}}>
+    <getproductsContext.Provider value={{allproducts,setAllproducts,cartCount,setCartcount}}>
       {props.children}
     </getproductsContext.Provider>
   )
