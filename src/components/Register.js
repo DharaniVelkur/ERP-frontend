@@ -51,8 +51,8 @@ const Register = () => {
                 setEmail("");
                 setPassword("");
                 setCpassword("")
-            }else{
-                toast("user already exists!!")
+            }else if(response.error){
+                toast(response.error);
                 setName("");
                 setPassword("");
                 setCpassword("");

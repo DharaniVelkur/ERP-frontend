@@ -38,12 +38,13 @@ const Login = () => {
             });
             const response=await data.json();
             console.log(response)
+
             if(response.finduser){
                 if(response.finduser.email==="admin@gmail.com"){
                     localStorage.setItem('isAdmin',true);
                 }
                 localStorage.setItem('usersdatatoken',response.token);
-                toast("Logged in successfully");
+                toast.success("Logged in successfully");
                 navigate('/dashboard');
                 setEmail("");
                 setPassword("");
