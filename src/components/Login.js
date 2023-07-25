@@ -108,7 +108,7 @@ const Login = () => {
             {!spin ?
           <button type="submit" className="btn btn-primary" onClick={loginUser}>
             Log In
-          </button>:<button type="submit" className="btn"><CircularProgress style={{'color': 'white'}} size="1rem"/></button>}
+          </button>:<button type="submit" className="btn btn-primary"><CircularProgress style={{'color': 'white'}} size="1rem"/></button>}
           <p className="pt-4">
             New User?<NavLink to={"/register"}>Sign Up</NavLink>
           </p>
