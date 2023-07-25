@@ -2,31 +2,42 @@ import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 const Register = () => {
     let [name,setName]=useState("");
     let [email,setEmail]=useState("");
     let [password,setPassword]=useState("");
     let [cpassword,setCpassword]=useState("");
+    let[spin,setSpin]=useState(false);
+
 
     const addUserData=async(e)=>{
         e.preventDefault();
 
         if(name===""&&email===""&&password===""&&cpassword===""){
+            setSpin(false);
             alert('Empty fields are not allowed!!!')
         }
         else if(name===""){
+            setSpin(false);
             alert("Please enter your Name");
         }else if(email===""){
+            setSpin(false);
             alert("Please enter your email");
         }else if(!email.includes("@")){
+            setSpin(false);
             alert("Enter valid email")
         }
         else if(password===""){
+            setSpin(false);
             alert("Please enter your Password")
         }else if(cpassword==="") {
+            setSpin(false);
             alert("Please enter confirm password")
         }else if(password!==cpassword){
+            setSpin(false);
             alert("password doesn't match")
         }else{
             const data=await fetch('https://erpbackend-959k.onrender.com/register',{
@@ -46,12 +57,14 @@ const Register = () => {
             console.log(data.status);
             
             if(data.status===200){
+                setSpin(false);
                 toast("user registration done");
                 setName("");
                 setEmail("");
                 setPassword("");
                 setCpassword("")
             }else if(response.error){
+                setSpin(false);
                 toast(response.error);
                 setName("");
                 setPassword("");
@@ -82,7 +95,8 @@ const Register = () => {
                     <input type="password" className="form-control" id="cpassword" value={cpassword} onChange={e=>setCpassword(e.target.value)} />
                 </div>
                 <div className='text-center'>
-                <button type="submit" className="btn btn-primary" onClick={addUserData}>Register</button>
+                    {!spin ?
+                <button type="submit" className="btn btn-primary" style={{width:"100%"}} onClick={addUserData}>Register</button> :<button className='btn btn-primary' style={{width:"100%"}}><CircularProgress size={'1rem'} style={{'color': 'white'}}/></button>}
                 <p>Already have an account?<NavLink to={'/login'}>Log In</NavLink></p>
                 </div>
                 
