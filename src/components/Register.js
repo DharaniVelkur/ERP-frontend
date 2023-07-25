@@ -96,7 +96,7 @@ const Register = () => {
                 </div>
                 <div className='text-center'>
                     {!spin ?
-                <button type="submit" className="btn btn-primary" style={{width:"100%"}} onClick={addUserData}>Register</button> :<button className='btn btn-primary' style={{width:"100%"}}><CircularProgress size={'1rem'} style={{'color': 'white'}}/></button>}
+                <button type="submit" className="btn btn-primary" style={{width:"100%"}} onClick={addUserData}>Register</button> :<button type='submit' className='btn btn-primary' style={{width:"100%"}}><CircularProgress size={'1rem'} style={{'color': 'white'}}/></button>}
                 <p>Already have an account?<NavLink to={'/login'}>Log In</NavLink></p>
                 </div>
                 
