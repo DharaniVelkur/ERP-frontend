@@ -74,6 +74,9 @@ const logoutuser=async ()=>{
       >
       <Avatar src="/broken-image.jpg" className='mx-3' />
       </Button>
+      {
+        localStorage.getItem('usersdatatoken') ?
+      
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
@@ -88,8 +91,7 @@ const logoutuser=async ()=>{
         <MenuItem onClick={()=>{
           handleClose();
         logoutuser()}}>Logout</MenuItem>
-      </Menu>
-
+      </Menu> :""}
     </div>
   </div>
 </nav>

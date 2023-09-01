@@ -114,10 +114,10 @@ const Login = () => {
           </p>
         </div>
       </form>
-      {/* <div className="mt-5" style={{ backgroundColor: "yellow" }}>
+      <div className="mt-5" style={{ backgroundColor: "yellow" }}>
         <p>For admin : Email address : admin@gmail.com</p>
         <p>password: 123456</p>
-      </div> */}
+      </div>
       <ToastContainer />
     </div>
   );

@@ -7,7 +7,7 @@ import { getproductsContext } from './context/ContextProvider';
 
 const Buynow = () => {
   let [cartdata, setCartdata] = useState([]);
-  let {cartCount,setCartcount}=useContext(getproductsContext)
+  let {cartCount,setCartcount}=useContext(getproductsContext);
   let navigate=useNavigate()
   const [isRazorpayLoaded, setIsRazorpayLoaded] = useState(false);
   const [isPaymentSuccess, setIsPaymentSuccess] = useState(false);
