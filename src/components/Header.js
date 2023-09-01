@@ -35,6 +35,9 @@ const logoutuser=async ()=>{
       localStorage.removeItem("usersdatatoken");
       localStorage.removeItem('isAdmin');
       navigate('/login');
+    } else if(data.status===401){
+      localStorage.clear();
+      navigate('/login');
     }
 }
 
