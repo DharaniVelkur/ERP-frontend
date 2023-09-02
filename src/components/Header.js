@@ -26,8 +26,8 @@ const logoutuser=async ()=>{
       headers: {
         "Access-Control-Allow-Origin": true,
         "Content-Type": "application/json",
-       Authorization : token,
-        Accept: "application/json",
+        Authorization : token,
+         Accept: "application/json",
       }
   });
   const data = await res.json();

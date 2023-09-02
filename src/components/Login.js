@@ -16,7 +16,7 @@ const Login = () => {
     if (localStorage.getItem("usersdatatoken")) {
       navigate("/dashboard");
     }
-  });
+  },[]);
 
   const loginUser = async (e) => {
     setSpin(true);

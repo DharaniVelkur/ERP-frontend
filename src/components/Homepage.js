@@ -89,6 +89,7 @@ const Homepage = () => {
         // console.log(data);
 
         if (data.status !== 200) {
+          localStorage.clear();
             navigate('/*');
         } else {
             navigate('/dashboard');
